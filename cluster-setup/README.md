@@ -25,33 +25,33 @@ sudo systemctl restart containerd<br>
 
 ### On all nodes, disable swap
 
-sudo swapoff -a
-sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+sudo swapoff -a<br>
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab<br>
 
-### On all nodes, install kubeadm, kubelet, and kubectl
-sudo apt-get update && sudo apt-get install -y apt-transport-https curl
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+### On all nodes, install kubeadm, kubelet, and kubectl<br>
+sudo apt-get update && sudo apt-get install -y apt-transport-https curl<br>
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -<br>
 
-cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
-deb https://apt.kubernetes.io/ kubernetes-xenial main
-EOF
+cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list<br>
+deb https://apt.kubernetes.io/ kubernetes-xenial main<br>
+EOF<br>
 
-sudo apt-get update
-sudo apt-get install -y kubelet=1.20.1-00 kubeadm=1.20.1-00 kubectl=1.20.1-00
-sudo apt-mark hold kubelet kubeadm kubectl
+sudo apt-get update<br>
+sudo apt-get install -y kubelet=1.20.1-00 kubeadm=1.20.1-00 kubectl=1.20.1-00<br>
+sudo apt-mark hold kubelet kubeadm kubectl<br>
 
 ### On the control plane node only, initialize the cluster and set up kubectl access.
 
-sudo kubeadm init --pod-network-cidr 192.168.0.0/16
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
+sudo kubeadm init --pod-network-cidr 192.168.0.0/16<br>
+mkdir -p $HOME/.kube<br>
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config<br>
+sudo chown $(id -u):$(id -g) $HOME/.kube/config<br>
 
 ### Verify the cluster is working
-kubectl version
+kubectl version<br>
 
 ### Install the Calico network add-on.
-kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml<br>
 
 ### Check the calico-related kube-system Pods to verify that everything is working so far (they may take a few moments to fully start up).
 kubectl get pods -n kube-system
