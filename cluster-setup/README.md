@@ -1,27 +1,27 @@
 ### On all nodes, set up containerd. You will need to load some kernel modules and modify some system settings as part of this process.
-cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf
-overlay
-br_netfilter
-EOF
+cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf <br>
+overlay<br>
+br_netfilter<br>
+EOF<br>
 
-sudo modprobe overlay
+sudo modprobe overlay<br>
 
-sudo modprobe br_netfilter
+sudo modprobe br_netfilter<br>
 
-cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
-net.bridge.bridge-nf-call-iptables = 1
-net.ipv4.ip_forward = 1
-net.bridge.bridge-nf-call-ip6tables = 1
-EOF
+cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf<br>
+net.bridge.bridge-nf-call-iptables = 1<br>
+net.ipv4.ip_forward = 1<br>
+net.bridge.bridge-nf-call-ip6tables = 1<br>
+EOF<br>
 
-sudo sysctl --system
+sudo sysctl --system<br>
 
 ### Install and configure containerd
 
-sudo apt-get update && sudo apt-get install -y containerd
-sudo mkdir -p /etc/containerd
-sudo containerd config default | sudo tee /etc/containerd/config.toml
-sudo systemctl restart containerd
+sudo apt-get update && sudo apt-get install -y containerd<br>
+sudo mkdir -p /etc/containerd<br>
+sudo containerd config default | sudo tee /etc/containerd/config.toml<br>
+sudo systemctl restart containerd<br>
 
 ### On all nodes, disable swap
 
