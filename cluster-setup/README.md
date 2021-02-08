@@ -26,7 +26,7 @@ sudo systemctl restart containerd<br>
 ### On all nodes, disable swap
 
 sudo swapoff -a<br>
-sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab <br>
+```sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab```
 
 ### On all nodes, install kubeadm, kubelet, and kubectl<br>
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl<br>
