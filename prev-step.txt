@@ -1,0 +1,36 @@
+1. Create an AWS EKS Cluster
+eksctl create cluster --name myekscluster --region us-east-1 --zones
+us-east-1a,us-east-1b --managed --nodegroup-name mynodegroup
+
+2. Test that your kubectl configuration is correct
+
+kubectl get svc
+
+3. Create an AWS EFS File System
+
+	3.1 Capture your VPC ID
+	3.2 Create a SG for your AWS EFS Mount target
+	3.3 Add Rules to the SG (port 2049, to allow inbound traffic to the NFS port)
+	3.4 Create AWS EFS File System
+	3.5 Capture your VPC (aws ec2 describe-instances --filters Name=vpc-id,Values= identifier
+for our VPC (i.e. vpc-1234567ab12a345cd) --query 
+'Reservations[*].Instances[].SubnetId')
+	3.6 Create two AWS EFS mount target
+	aws efs create-mount-target \
+--file-system-id identifier for our file system (i.e. fs-123b45fa) \
+--subnet-id identifier for our node group subnets (i.e. subnet-
+1234567ab12a345cd) \
+--security-group identifier for the security group created for our 
+Amazon EFS mount targets (i.e. sg-1234567ab12a345cd) \
+--region us-east-1
+
+	3.7 Create an AWS EFS access point
+	
+	aws efs create-access-point --file-system-id identifier for our file 
+system (i.e. fs-123b45fa) \
+--posix-user Uid=1000,Gid=1000 \
+--root-directory 
+"Path=/jenkins,CreationInfo={OwnerUid=1000,OwnerGid=1000,Permissions=777}"
+
+	
+	Next follow the same for earlier doc.txt 

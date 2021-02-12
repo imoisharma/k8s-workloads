@@ -1,0 +1,61 @@
+Assuming, you have AWS account, installed AWS CLI, kubectl, eksctl, helm etc. Already created EKS cluster.
+
+Steps to create EFS File System
+1. Provide your VPC 
+2. SG if you don't have earlier
+3. For EFS-SecurityGroup(SG), also allowed port 2049
+4. Create EFS https://docs.aws.amazon.com/efs/latest/ug/creating-using-create-fs.html
+5. Mount Targets in each of the AZ if required (via CLI)
+
+aws efs create-mount-target \
+--file-system-id identifier for our file system (i.e. fs-123b45fa) \
+--subnet-id identifier for our node group subnets (i.e. subnet-
+1234567ab12a345cd) \
+--security-group identifier for the security group created for our 
+Amazon EFS mount targets (i.e. sg-1234567ab12a345cd) \
+--region us-east-1 (change region and other parameters accordingly)
+
+6. Create Access point https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html
+
+or via cli
+aws efs create-access-point --file-system-id identifier for our file 
+system (i.e. fs-123b45fa) \
+--posix-user Uid=1000,Gid=1000 \
+--root-directory 
+"Path=/jenkins,CreationInfo={OwnerUid=1000,OwnerGid=1000,Permissions=777}"
+
+for more refer to above documentation
+
+# Deploy EFS CSI driver to your EKS
+
+kubectl apply -k "github.com/kubernetes-sigs/aws-efs-csi-
+driver/deploy/kubernetes/overlays/stable/?ref=master"
+
+Output: Should say something like efs-csi-node created
+
+Create efs-sc.yaml
+Create efs-pv.yaml 
+Create efs-pvc.yaml
+
+Deploy them 
+kubectl apply -f 
+efs-sc.yaml,efs-pv.yaml,efs-pvc.yaml
+
+# Deploy Jenkins
+
+(Add stable chart repo)
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+
+(Install jenkins) # change accordingly
+helm install jenkins stable/jenkins --set
+rbac.create=true,master.servicePort=80,master.serviceType=LoadBalancer
+,persistence.existingClaim=efs-pvc
+
+(Ingress loadbalancer name)
+printf $(kubectl get service jenkins -o 
+jsonpath="{.status.loadBalancer.ingress[].hostname}");echo
+
+( to get admin passwd)
+printf $(kubectl get secret jenkins -o jsonpath="{.data.jenkins-admin-
+password}" | base64 --decode);echo
+
