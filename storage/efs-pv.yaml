@@ -1,0 +1,18 @@
+# make sure to provide the parameters for VolumeHandle (file system ID,accesspoint ID)
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: efs-pv
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: efs-sc
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: identifier for our file system::identifier for our 
+access point (i.e. fs-123b45fa::fsap-12345678910ab12cd34)
