@@ -14,6 +14,7 @@ net.ipv4.ip_forward = 1<br>
 net.bridge.bridge-nf-call-ip6tables = 1<br>
 EOF<br>
 
+#### Apply sysctl params without reboot
 sudo sysctl --system<br>
 
 ### Install and configure containerd
