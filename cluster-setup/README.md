@@ -48,14 +48,14 @@ sudo apt-mark hold kubelet kubeadm kubectl<br>
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config<br>
   sudo chown $(id -u):$(id -g) $HOME/.kube/config<br>
 
-### Verify the cluster is working
-kubectl version<br>
+  #### Verify the cluster is working
+  kubectl version<br>
 
-### Install the Calico network add-on.
-kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml<br>
+  #### Install the Calico network add-on.
+  kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml<br>
 
-### Check the calico-related kube-system Pods to verify that everything is working so far (they may take a few moments to fully start up).
-kubectl get pods -n kube-system
+  #### Check the calico-related kube-system Pods to verify that everything is working so far (they may take a few moments to fully start up).
+  kubectl get pods -n kube-system
 
 ### Get the join command (this command is also printed during kubeadm init . Feel free to simply copy it from there).
 kubeadm token create --print-join-command
