@@ -43,10 +43,10 @@ sudo apt-mark hold kubelet kubeadm kubectl<br>
 
 ### On the control plane node only, initialize the cluster and set up kubectl access.
 
-sudo kubeadm init --pod-network-cidr 192.168.0.0/16<br>
-mkdir -p $HOME/.kube<br>
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config<br>
-sudo chown $(id -u):$(id -g) $HOME/.kube/config<br>
+  sudo kubeadm init --pod-network-cidr 192.168.0.0/16<br>
+  mkdir -p $HOME/.kube<br>
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config<br>
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config<br>
 
 ### Verify the cluster is working
 kubectl version<br>
