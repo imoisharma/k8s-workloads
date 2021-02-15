@@ -57,8 +57,8 @@ sudo apt-mark hold kubelet kubeadm kubectl<br>
   #### Check the calico-related kube-system Pods to verify that everything is working so far (they may take a few moments to fully start up).
   kubectl get pods -n kube-system
 
-### Get the join command (this command is also printed during kubeadm init . Feel free to simply copy it from there).
-kubeadm token create --print-join-command
+  #### Get the join command (this command is also printed during kubeadm init . Feel free to simply copy it from there).
+  kubeadm token create --print-join-command
 
 ### Copy the join command from the control plane node. Run it on each worker node as root (i.e. with sudo ).
 sudo kubeadm join ...
