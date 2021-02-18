@@ -5,7 +5,6 @@ br_netfilter<br>
 EOF<br>
 
 sudo modprobe overlay<br>
-
 sudo modprobe br_netfilter<br>
 
 cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf<br>
