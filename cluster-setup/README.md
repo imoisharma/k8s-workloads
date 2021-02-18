@@ -51,7 +51,7 @@ sudo apt-mark hold kubelet kubeadm kubectl<br>
   kubectl version<br>
 
   #### Install the Calico network add-on.
-  kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml<br>
+  `kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml`<br>
 
   #### Check the calico-related kube-system Pods to verify that everything is working so far (they may take a few moments to fully start up).
   kubectl get pods -n kube-system
