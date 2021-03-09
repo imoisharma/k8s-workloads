@@ -1,4 +1,4 @@
-### On all nodes, set up containerd. You will need to load some kernel modules and modify some system settings as part of this process.
+### O all nodes, set up containerd. You will need to load some kernel modules and modify some system settings as part of this process.
 cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf <br>
 overlay<br>
 br_netfilter<br>
