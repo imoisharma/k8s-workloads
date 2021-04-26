@@ -5,3 +5,18 @@ Viewing namespaces
 
 ```kubectl get namespaces```
 
+2. Creating a new namespace 
+Create a new YAML file called my-namespace.yaml with the contents:
+
+    ```apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: <insert-namespace-name-here>```
+
+Then run:
+
+   ``` kubectl create -f ./my-namespace.yaml```
+
+Alternatively, you can create namespace using below command:
+
+  ```  kubectl create namespace <insert-namespace-name-here>```
