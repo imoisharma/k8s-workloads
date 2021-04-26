@@ -1,4 +1,4 @@
-## Welcome to K8s namespace Readme
+## Welcome to K8s namespace README
 Viewing namespaces
 
 1. List the current namespaces in a cluster using:
@@ -12,7 +12,6 @@ Create a new YAML file called my-namespace.yaml with the contents:
     kind: Namespace
     metadata:
       name: <insert-namespace-name-here>```
-
 Then run:
 
    ``` kubectl create -f ./my-namespace.yaml```
@@ -20,3 +19,9 @@ Then run:
 Alternatively, you can create namespace using below command:
 
   ```  kubectl create namespace <insert-namespace-name-here>```
+3. Deleting a namespace
+
+Delete a namespace with
+
+```kubectl delete namespaces <insert-some-namespace-name>```
+
