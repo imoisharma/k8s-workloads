@@ -19,6 +19,7 @@ Then run:
 Alternatively, you can create namespace using below command:
 
   ```  kubectl create namespace <insert-namespace-name-here>```
+  
 3. Deleting a namespace
 
 Delete a namespace with
