@@ -26,3 +26,4 @@ Delete a namespace with
 
 ```kubectl delete namespaces <insert-some-namespace-name>```
 
+For more information, can found in my article on Medium: https://imoisharma.medium.com/namespaces-in-kubernetes-k8s-series-by-m-sharma-on-demand-part-2-65e455b846a0?source=your_stories_page-------------------------------------
