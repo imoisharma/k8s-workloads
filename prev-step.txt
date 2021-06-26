@@ -1,4 +1,3 @@
-
 1. Create an AWS EKS Cluster
 eksctl create cluster --name myekscluster --region us-east-1 --zones
 us-east-1a,us-east-1b --managed --nodegroup-name mynodegroup
