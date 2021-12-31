@@ -1,3 +1,4 @@
+
 Assuming, you have AWS account, installed AWS CLI, kubectl, eksctl, helm etc. Already created EKS cluster.
 
 Steps to create EFS File System
